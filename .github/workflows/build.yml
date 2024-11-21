@@ -1,0 +1,26 @@
+name: ws_build
+
+on:
+    push:
+        branches:
+            - main
+            - devel
+
+
+jobs:
+    workspace-build:
+        runs-on: ubuntu-22.04
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                path: workspace
+
+            - name: Setup ROS2 workspace
+              uses: ichiro-its/ros2-ws-action/setup@v1.0.0
+                with:
+                    rosdistro: humble
+
+            - name: Build ROS2 workspace
+              uses: ichiro-its/ros2-ws-action/build@v1.0.0
